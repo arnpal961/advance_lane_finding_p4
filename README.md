@@ -3,7 +3,7 @@
 
 
 The Project
----
+----
 
 The goals / steps of this project are the following:
 
@@ -36,7 +36,8 @@ Folder Specification
     8. The output video after applying the pipeline to project_video.mp4 is output.mp4.
 
 
-
+**Note**: All codes are self explanatory. Comments and function documentation has been given where needed.
+          
 #### Finding chess board corner
 ---
 
@@ -70,8 +71,12 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 ![Undistorted Test](./resources/undist_testimg.png)
 
 #### Applying gradient and color thresolding
+I used a combination of color and gradient thresholds to generate a binary image .
+       
+        1. compute the scaled sobel with respect to x gradient then take a thresolding range b/w 20 and 100.
+        2. Take the saturation space by converting the image from RGB to HLS space . Then applied a thresolding
+           range b/w 170 and 255.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
 **Transformed image after applying gradient and color thresolding**
 ![Thresolded Image](./resources/trnsfrm.png)
 
@@ -92,9 +97,29 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### Finding lane line pixel and fitting polynomial
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+     1. Divide the thresolded binary transformed image into n=9 horizontal strips of equal height.
+     2. Compute the histogram of each strip using np.sum().
+     3. Identify two peaks where histogram computed are maximums.
+     
+**Birds eye view of a test transformed image and histogram drawn**
+![Image 1st](./resources/hist.png)
+![Image 2nd](./resources/hist1.png)
 
-![alt text][image5]
+    
+     4. Get the pixels in that horizontal strip that have x coordinates close to the two 
+        peaks of x coordinates.
+
+
+**Rectangles are drawn where lane line pixels are detected**
+![Image 3rd](./resources/poslane.png)
+ 
+     5. Fit a second order polynomial to each lane line using np.polyfit() function.
+
+
+**Polynomial fitted to birds-eye-view image**
+![Image 4th](./resources/poly1.png)
+![Image 5th](./resources/poly2.png)
+
 
 #### Calculation of radius of curvature and vehicle position.
 
