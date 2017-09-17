@@ -102,6 +102,7 @@ I verified that my perspective transform was working as expected by drawing the 
      3. Identify two peaks where histogram computed are maximums.
      
 **Birds eye view of a test transformed image and histogram drawn**
+
 ![Image 1st](./resources/hist.png)
 ![Image 2nd](./resources/hist1.png)
 
@@ -124,9 +125,11 @@ I verified that my perspective transform was working as expected by drawing the 
 ![Image 5th](./resources/ploy2.png)
 
 
-#### Calculation of radius of curvature and vehicle position.
+#### Calculation of radius of curvature.
 
-I did this in lines # through # in my code in `my_other_file.py`
+    left_curverad = ((1 + (2*left_fit[0]*y_eval + left_fit[1])**2)**1.5)/ np.absolute(2*left_fit[0])
+    right_curverad = ((1 + (2*right_fit[0]*y_eval + right_fit[1])**2)**1.5)/ np.absolute(2*right_fit[0])
+    curvature = (left_curverad + right_curverad)/2
 
 #### Example on a test image.
 
