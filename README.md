@@ -37,18 +37,27 @@ Folder Specification
 
 
 
-**Camera Calibration**
+#### Finding chess board corner
 ---
 
-#### Calculation of camera matrix and distortion coefficients
+**The code for this step is contained in the fourth code cell of the IPython notebook advanced_lane_finding.ipynb.**
 
-The code for this step is contained in the first code cell of the IPython notebook located in "./examples/example.ipynb" (or in lines # through # of the file called `some_file.py`).  
+I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time `cv2.findChessboardCorners()` detects all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection. 
 
-I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
+Then draw the chess board corners by `cv2.drawChessboardCorners()`. Here is an example of chessboard corner drawn .
 
-I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 **Chess Board Corners**
+
 ![Image](./resources/chsbrdcrnr.png)
+
+#### Calibrating camera and calculation of camera matrix and distortion coefficients
+`undistort_image()` function is used to undistort a image, the previous output `objpoints` and `imgpoints` have been used 
+to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the input image using the `cv2.undistort()` function .
+
+**Undistorted Chess board image**
+
+![Undistorted Chess Board](./resources/undist_chsbrd.png)
+
 
 ### Pipeline (single images)
 ---
@@ -56,13 +65,12 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 #### Example of distortion corrected image.
 
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
-**Undistorted Chess board image**
-![Undistorted Chess Board](./resources/undist_chsbrd.png)
 
 **Undistorted test image**
 ![Undistorted Test](./resources/undist_testimg.png)
 
 #### Applying gradient and color thresolding
+
 I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
 **Transformed image after applying gradient and color thresolding**
 ![Thresolded Image](./resources/trnsfrm.png)
