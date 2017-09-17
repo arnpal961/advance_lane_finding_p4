@@ -111,14 +111,17 @@ I verified that my perspective transform was working as expected by drawing the 
 
 
 **Rectangles are drawn where lane line pixels are detected**
+
 ![Image 3rd](./resources/poslane.png)
+ 
  
      5. Fit a second order polynomial to each lane line using np.polyfit() function.
 
 
 **Polynomial fitted to birds-eye-view image**
+
 ![Image 4th](./resources/poly1.png)
-![Image 5th](./resources/poly2.png)
+![Image 5th](./resources/ploy2.png)
 
 
 #### Calculation of radius of curvature and vehicle position.
