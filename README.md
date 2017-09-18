@@ -73,9 +73,11 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 #### Applying gradient and color thresolding
 I used a combination of color and gradient thresholds to generate a binary image .
        
-        1. compute the scaled sobel with respect to x gradient then take a thresolding range b/w 20 and 100.
-        2. Take the saturation space by converting the image from RGB to HLS space . Then applied a thresolding
-           range b/w 170 and 255.
+        1. compute the sobel magnitude  then take a thresolding range b/w 20 and 255.
+        2. select_yellow() and select_white() aretwo functions to extract the yellow
+           and white lane lines the combine it by bitwise or.
+        3. Then combine it with sobel magnitude calculated.
+       
 
 **Transformed image after applying gradient and color thresolding**
 ![Thresolded Image](./resources/trnsfrm.png)
