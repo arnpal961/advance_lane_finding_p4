@@ -86,8 +86,8 @@ I used a `wrap()` function to get a birds eye view using perspective transform. 
 
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
-| 700, 460      | 950,0         |  
-| 1140, 720     | 950, 720      |
+| 710, 460      | 990,0         |  
+| 1090, 720     | 990, 720      |
 | 200, 720      | 300, 720      |
 | 580, 460      | 300, 0        |
 
@@ -127,8 +127,11 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### Calculation of radius of curvature.
 
-    left_curverad = ((1 + (2*left_fit[0]*y_eval + left_fit[1])**2)**1.5)/ np.absolute(2*left_fit[0])
-    right_curverad = ((1 + (2*right_fit[0]*y_eval + right_fit[1])**2)**1.5)/ np.absolute(2*right_fit[0])
+    left_curverad = ((1 + (2*left_fit_cr[0]*y_eval*ym_per_pix + left_fit_cr[1])**2)**1.5)\
+                     / np.absolute(2*left_fit_cr[0])
+    right_curverad = ((1 + (2*right_fit_cr[0]*y_eval*ym_per_pix + right_fit_cr[1])**2)**1.5)\
+                     / np.absolute(2*right_fit_cr[0])
+    
     curvature = (left_curverad + right_curverad)/2
 
 #### Example on a test image.
